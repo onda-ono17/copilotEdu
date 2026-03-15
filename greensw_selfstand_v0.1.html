@@ -1,0 +1,1320 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>자립청년 영상 창작 프로그램 제안 발표</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			color-scheme: light;
+			--krds-primary: #246df4;
+			--krds-primary-2: #133871;
+			--krds-ci-accent: #571bf0;
+			--krds-surface: #ffffff;
+			--krds-bg: #f4faff;
+			--krds-bg-2: #eef8ff;
+			--krds-border: #d5e3fb;
+			--krds-text: #111111;
+			--krds-sub: #4b5563;
+			--krds-success: #1f7a59;
+			--krds-info: #0d5cab;
+			--krds-warm: #a95f1a;
+			--krds-chapter-bg: #f4f5f6;
+			--krds-chapter-text: #324256;
+			--shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.08);
+			--shadow-md: 0 14px 28px rgba(0, 0, 0, 0.12);
+		}
+
+		body[data-style="ci"] {
+			--krds-primary: #1f7a59;
+			--krds-primary-2: #0f3f2f;
+			--krds-ci-accent: #7bc67b;
+			--krds-bg: #eef5f0;
+			--krds-bg-2: #e8f4ee;
+			--krds-border: #d4e6da;
+			--krds-chapter-bg: #f0f4f1;
+			--krds-chapter-text: #375346;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			margin: 0;
+			min-height: 100%;
+			font-family: "Noto Sans KR", sans-serif;
+			background: var(--krds-bg);
+			color: var(--krds-text);
+			transition: background-color 0.25s ease, color 0.25s ease;
+		}
+
+		.skip-link {
+			position: absolute;
+			left: 16px;
+			top: -44px;
+			padding: 10px 14px;
+			border-radius: 10px;
+			background: #111;
+			color: #fff;
+			z-index: 999;
+		}
+
+		.skip-link:focus {
+			top: 12px;
+		}
+
+		.gov-banner {
+			background: #eef5ff;
+			border-bottom: 1px solid var(--krds-border);
+			font-size: 0.94rem;
+			color: var(--krds-sub);
+		}
+
+		.gov-banner .inner {
+			width: min(1500px, calc(100% - 32px));
+			margin: 0 auto;
+			padding: 10px 0;
+			display: flex;
+			justify-content: space-between;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.gov-banner strong {
+			color: var(--krds-text);
+		}
+
+		header {
+			background: linear-gradient(135deg, #133871 0%, #246df4 100%);
+			color: #fff;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+		}
+
+		.header-inner {
+			width: min(1500px, calc(100% - 32px));
+			margin: 0 auto;
+			padding: 18px 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.brand-logo {
+			width: 54px;
+			height: 54px;
+			border-radius: 12px;
+			background: rgba(255, 255, 255, 0.18);
+			border: 1px solid rgba(255, 255, 255, 0.34);
+			padding: 6px;
+			object-fit: contain;
+		}
+
+		.brand-badge {
+			width: 46px;
+			height: 46px;
+			border-radius: 12px;
+			display: grid;
+			place-items: center;
+			background: rgba(255, 255, 255, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.4);
+			font-weight: 800;
+			font-size: 0.9rem;
+		}
+
+		.brand h1 {
+			margin: 0;
+			font-size: 1.2rem;
+			line-height: 1.2;
+		}
+
+		.brand p {
+			margin: 2px 0 0;
+			font-size: 0.9rem;
+			color: rgba(255, 255, 255, 0.85);
+		}
+
+		.header-tools {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.btn {
+			min-height: 42px;
+			padding: 9px 14px;
+			border-radius: 10px;
+			border: 1px solid transparent;
+			font-weight: 700;
+			font-size: 0.92rem;
+			cursor: pointer;
+			transition: transform 0.2s ease, background-color 0.2s ease;
+		}
+
+		.btn:hover {
+			transform: translateY(-1px);
+		}
+
+		.btn-light {
+			color: #fff;
+			background: rgba(255, 255, 255, 0.16);
+			border-color: rgba(255, 255, 255, 0.3);
+		}
+
+		.btn-strong {
+			color: #ffffff;
+			background: #571bf0;
+			border-color: #4b15d1;
+		}
+
+		body[data-style="ci"] .btn-strong {
+			background: var(--krds-primary);
+			border-color: var(--krds-primary-2);
+		}
+
+		.presentation-wrap {
+			width: min(1500px, calc(100% - 32px));
+			margin: 18px auto 26px;
+		}
+
+		.slide-track {
+			display: grid;
+			grid-auto-flow: column;
+			grid-auto-columns: 100%;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			scroll-behavior: smooth;
+			border-radius: 16px;
+			border: 1px solid var(--krds-border);
+			box-shadow: var(--shadow-sm);
+			background: var(--krds-surface);
+		}
+
+		.slide {
+			scroll-snap-align: start;
+			min-height: min(84vh, 860px);
+			aspect-ratio: 16 / 9;
+			position: relative;
+			overflow: hidden;
+			padding: clamp(20px, 3vw, 44px);
+			padding-top: clamp(74px, 8vw, 92px);
+			background: var(--krds-surface);
+			border-right: 1px solid #e8edf3;
+		}
+
+		.slide::before {
+			content: attr(data-chapter) " | " attr(data-topic);
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 44px;
+			display: flex;
+			align-items: center;
+			padding: 0 18px;
+			font-size: 0.84rem;
+			font-weight: 700;
+			letter-spacing: 0.01em;
+			background: var(--krds-chapter-bg);
+			border-bottom: 1px solid var(--krds-border);
+			color: var(--krds-chapter-text);
+		}
+
+		.slide::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 6px;
+			height: 44px;
+			background: var(--krds-primary);
+		}
+
+		.slide:last-child {
+			border-right: none;
+		}
+
+		.slide h2 {
+			margin: 0 0 10px;
+			font-size: clamp(1.6rem, 2.4vw, 2.5rem);
+			letter-spacing: -0.03em;
+			line-height: 1.2;
+		}
+
+		.slide .lead {
+			margin: 0;
+			color: var(--krds-sub);
+			font-size: clamp(1rem, 1.35vw, 1.25rem);
+			max-width: 1100px;
+		}
+
+		.slide-number {
+			position: absolute;
+			top: 54px;
+			right: 20px;
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			display: grid;
+			place-items: center;
+			background: var(--krds-bg-2);
+			border: 1px solid var(--krds-border);
+			font-weight: 800;
+			color: var(--krds-primary);
+		}
+
+		.slide.top-hero {
+			background:
+				radial-gradient(900px 480px at 88% 8%, rgba(36, 109, 244, 0.16), transparent 60%),
+				radial-gradient(700px 380px at 5% 90%, rgba(87, 27, 240, 0.11), transparent 66%),
+				linear-gradient(180deg, #fbfdff 0%, #eef8ff 100%);
+		}
+
+		body[data-style="ci"] .slide.top-hero {
+			background:
+				radial-gradient(900px 480px at 88% 8%, rgba(31, 122, 89, 0.16), transparent 60%),
+				radial-gradient(700px 380px at 5% 90%, rgba(123, 198, 123, 0.14), transparent 66%),
+				linear-gradient(180deg, #f8fffb 0%, #edf7f2 100%);
+		}
+
+		.hero-grid {
+			margin-top: 22px;
+			display: grid;
+			grid-template-columns: 1.2fr 0.8fr;
+			gap: 20px;
+			height: calc(100% - 120px);
+			align-content: start;
+		}
+
+		.panel {
+			border: 1px solid var(--krds-border);
+			border-radius: 14px;
+			background: #fff;
+			padding: 16px;
+			box-shadow: 0 6px 18px rgba(19, 56, 113, 0.09);
+		}
+
+		.tag-row {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			margin-top: 12px;
+		}
+
+		.tag {
+			display: inline-flex;
+			padding: 7px 11px;
+			border-radius: 999px;
+			border: 1px solid var(--krds-border);
+			background: #fff;
+			color: var(--krds-sub);
+			font-size: 0.9rem;
+			font-weight: 600;
+		}
+
+		.pill-strong {
+			border-color: rgba(36, 109, 244, 0.24);
+			background: #e9f2ff;
+			color: var(--krds-primary);
+		}
+
+		.kpi-list {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: grid;
+			gap: 10px;
+		}
+
+		.kpi-list li {
+			display: flex;
+			justify-content: space-between;
+			gap: 8px;
+			padding: 10px 12px;
+			border-radius: 10px;
+			border: 1px solid #e7edf3;
+			background: #fafcff;
+			font-weight: 700;
+		}
+
+		.kpi-list small {
+			font-weight: 500;
+			color: var(--krds-sub);
+		}
+
+		.two-col {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 18px;
+			margin-top: 18px;
+		}
+
+		.list-block h3,
+		.matrix h3,
+		.story-strip h3,
+		.carousel-wrap h3,
+		.stack-wrap h3,
+		.quote-block h3 {
+			margin: 0 0 10px;
+			font-size: 1.18rem;
+			letter-spacing: -0.02em;
+		}
+
+		.list-block ul {
+			margin: 0;
+			padding-left: 18px;
+			color: var(--krds-sub);
+			line-height: 1.65;
+			font-size: 1.03rem;
+		}
+
+		.matrix {
+			margin-top: 18px;
+			border: 1px solid var(--krds-border);
+			border-radius: 14px;
+			overflow: hidden;
+			background: #ffffff;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.97rem;
+		}
+
+		th,
+		td {
+			padding: 12px 14px;
+			border-bottom: 1px solid #e7edf3;
+			text-align: left;
+			vertical-align: top;
+		}
+
+		th {
+			background: #eef5ff;
+			color: #1f2937;
+		}
+
+		tbody tr:last-child td,
+		tbody tr:last-child th {
+			border-bottom: none;
+		}
+
+		.flow {
+			margin-top: 20px;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 10px;
+		}
+
+		.flow-step {
+			position: relative;
+			border: 1px solid var(--krds-border);
+			border-radius: 12px;
+			background: #fff;
+			padding: 12px;
+			min-height: 120px;
+		}
+
+		.flow-step strong {
+			display: block;
+			margin-bottom: 8px;
+			color: var(--krds-primary);
+		}
+
+		.flow-step p {
+			margin: 0;
+			color: var(--krds-sub);
+			font-size: 0.95rem;
+		}
+
+		.flow-step::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: -9px;
+			width: 14px;
+			height: 14px;
+			border-right: 2px solid #93a0b3;
+			border-top: 2px solid #93a0b3;
+			transform: translateY(-50%) rotate(45deg);
+		}
+
+		.flow-step:last-child::after {
+			display: none;
+		}
+
+		.highlight {
+			margin-top: 14px;
+			border-left: 5px solid var(--krds-info);
+			background: #eff6ff;
+			border-radius: 10px;
+			padding: 12px 14px;
+			font-weight: 700;
+			color: #143a74;
+		}
+
+		.carousel-wrap {
+			margin-top: 18px;
+			border: 1px solid var(--krds-border);
+			border-radius: 16px;
+			overflow: hidden;
+			background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 100%);
+		}
+
+		.carousel-header {
+			padding: 14px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 8px;
+			border-bottom: 1px solid #e7edf3;
+		}
+
+		.carousel-controls {
+			display: flex;
+			gap: 8px;
+		}
+
+		.control-btn {
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			border: 1px solid #9da8b8;
+			background: #fff;
+			font-weight: 800;
+			line-height: 1;
+			cursor: pointer;
+		}
+
+		.carousel-stage {
+			position: relative;
+			height: 290px;
+			overflow: hidden;
+		}
+
+		.carousel-row {
+			position: absolute;
+			left: 0;
+			top: 0;
+			display: flex;
+			gap: 14px;
+			padding: 16px;
+			transition: transform 0.4s ease;
+		}
+
+		.program-card {
+			width: 300px;
+			min-height: 246px;
+			border: 1px solid var(--krds-border);
+			border-radius: 14px;
+			background: #fff;
+			box-shadow: var(--shadow-sm);
+			padding: 14px;
+			display: grid;
+			gap: 10px;
+		}
+
+		.program-card strong {
+			font-size: 1.02rem;
+			color: var(--krds-primary);
+		}
+
+		.program-card p {
+			margin: 0;
+			color: var(--krds-sub);
+			font-size: 0.95rem;
+		}
+
+		.program-card ul {
+			margin: 0;
+			padding-left: 18px;
+			color: var(--krds-sub);
+			font-size: 0.92rem;
+			line-height: 1.55;
+		}
+
+		.stack-wrap {
+			margin-top: 18px;
+			border: 1px solid var(--krds-border);
+			border-radius: 16px;
+			padding: 16px;
+			background: #fbfdff;
+		}
+
+		.stack-help {
+			margin: 0 0 14px;
+			color: var(--krds-sub);
+		}
+
+		.stack-stage {
+			position: relative;
+			height: 300px;
+		}
+
+		.stack-card {
+			position: absolute;
+			width: min(76%, 560px);
+			border-radius: 14px;
+			border: 1px solid var(--krds-border);
+			background: #fff;
+			box-shadow: var(--shadow-md);
+			padding: 14px;
+			cursor: pointer;
+			transition: transform 0.35s ease, box-shadow 0.35s ease;
+		}
+
+		.stack-card h4 {
+			margin: 0 0 6px;
+			color: #1f2937;
+			font-size: 1.04rem;
+		}
+
+		.stack-card p {
+			margin: 0;
+			color: var(--krds-sub);
+			font-size: 0.95rem;
+		}
+
+		.stack-card.card-a {
+			top: 12px;
+			left: 4%;
+			z-index: 1;
+			transform: rotate(-3deg);
+			border-left: 7px solid var(--krds-primary);
+		}
+
+		.stack-card.card-b {
+			top: 56px;
+			left: 18%;
+			z-index: 2;
+			transform: rotate(1deg);
+			border-left: 7px solid var(--krds-success);
+		}
+
+		.stack-card.card-c {
+			top: 100px;
+			left: 32%;
+			z-index: 3;
+			transform: rotate(-1deg);
+			border-left: 7px solid var(--krds-warm);
+		}
+
+		.stack-card.active {
+			box-shadow: 0 18px 34px rgba(0, 0, 0, 0.2);
+			transform: rotate(0deg) scale(1.02);
+		}
+
+		.story-strip {
+			margin-top: 18px;
+			border: 1px solid var(--krds-border);
+			border-radius: 14px;
+			background: #fff;
+			padding: 14px;
+		}
+
+		.story-steps {
+			margin-top: 12px;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 10px;
+		}
+
+		.story-step {
+			border: 1px solid #dbe6fb;
+			border-radius: 12px;
+			padding: 12px;
+			background: #f5f9ff;
+		}
+
+		.story-step strong {
+			color: var(--krds-primary);
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		.quote-block {
+			margin-top: 20px;
+			border: 1px solid #d5e3fb;
+			border-radius: 16px;
+			background: linear-gradient(135deg, #f7f4fe 0%, #eef5ff 100%);
+			padding: 18px;
+		}
+
+		.quote {
+			margin: 0;
+			font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+			line-height: 1.5;
+			font-weight: 700;
+			color: #283a73;
+		}
+
+		.slide-nav {
+			margin-top: 12px;
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		.dot {
+			min-width: 34px;
+			height: 34px;
+			border-radius: 999px;
+			border: 1px solid #9da8b8;
+			background: #fff;
+			color: #1f2937;
+			font-weight: 700;
+			font-size: 0.86rem;
+			cursor: pointer;
+		}
+
+		.dot.active {
+			border-color: var(--krds-primary);
+			background: var(--krds-primary);
+			color: #fff;
+		}
+
+		.resource-panel {
+			margin-top: 14px;
+			padding: 14px;
+			border: 1px solid var(--krds-border);
+			border-radius: 12px;
+			background: #ffffff;
+		}
+
+		.resource-panel h3 {
+			margin: 0 0 8px;
+			font-size: 1rem;
+		}
+
+		.resource-links {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.resource-links a {
+			display: inline-flex;
+			align-items: center;
+			min-height: 36px;
+			padding: 6px 12px;
+			border: 1px solid var(--krds-border);
+			border-radius: 999px;
+			background: #f5f9ff;
+			color: var(--krds-primary);
+			font-weight: 700;
+			text-decoration: none;
+		}
+
+		.resource-links a:hover {
+			background: #e9f2ff;
+		}
+
+		.hint {
+			margin-top: 6px;
+			text-align: center;
+			color: var(--krds-sub);
+			font-size: 0.9rem;
+		}
+
+		.tone-note {
+			margin: 8px 0 0;
+			text-align: center;
+			color: var(--krds-sub);
+			font-size: 0.86rem;
+		}
+
+		@keyframes float-in {
+			from {
+				opacity: 0;
+				transform: translateY(8px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.panel,
+		.matrix,
+		.carousel-wrap,
+		.stack-wrap,
+		.story-strip,
+		.quote-block {
+			animation: float-in 0.45s ease both;
+		}
+
+		@media (max-width: 1200px) {
+			.hero-grid,
+			.two-col,
+			.flow,
+			.story-steps {
+				grid-template-columns: 1fr;
+			}
+
+			.slide {
+				min-height: 720px;
+			}
+		}
+
+		@media (max-width: 780px) {
+			.presentation-wrap,
+			.gov-banner .inner,
+			.header-inner {
+				width: min(1500px, calc(100% - 20px));
+			}
+
+			.slide {
+				min-height: 650px;
+				aspect-ratio: auto;
+				padding: 18px;
+				padding-top: 72px;
+			}
+
+			.stack-stage {
+				height: 350px;
+			}
+
+			.stack-card {
+				width: 88%;
+				left: 6% !important;
+			}
+
+			.stack-card.card-a { top: 16px; }
+			.stack-card.card-b { top: 120px; }
+			.stack-card.card-c { top: 224px; }
+		}
+	</style>
+</head>
+<body>
+	<a class="skip-link" href="#slides">본문 바로가기</a>
+
+	<div class="gov-banner" role="region" aria-label="공식 안내">
+		<div class="inner">
+			<div><strong>전자정부 UI/UX 기준 발표형 시안</strong> KRDS 구조를 참고한 16:9 와이드 제안서 템플릿입니다.</div>
+			<div>주제: 자립청년 영상 창작 프로그램 3차 연속 수행 제안 | 기관 CI 적용판</div>
+		</div>
+	</div>
+
+	<header>
+		<div class="header-inner">
+			<div class="brand">
+				<img class="brand-logo" src="greensw_ci_logo.svg" alt="기관 로고" />
+				<div>
+					<h1>자립청년 영상 창작 프로그램 제안 발표</h1>
+					<p>GREEN SW CI | 검증된 운영 + 고도화된 모델 + 사회적 임팩트</p>
+				</div>
+			</div>
+			<div class="header-tools">
+				<button class="btn btn-light" id="toggleTheme" type="button">표준/기관 톤 전환</button>
+				<button class="btn btn-light" id="prevSlide" type="button">이전 슬라이드</button>
+				<button class="btn btn-strong" id="nextSlide" type="button">다음 슬라이드</button>
+			</div>
+		</div>
+	</header>
+
+	<main class="presentation-wrap" id="slides">
+		<section class="slide-track" id="slideTrack" aria-label="발표 슬라이드">
+			<article class="slide top-hero" data-chapter="CHAPTER 01" data-topic="사업 비전">
+				<span class="slide-number">1</span>
+				<h2>세 번째 이야기를 제안합니다</h2>
+				<p class="lead">2년의 검증된 운영 경험 위에, 자립청년의 프라이버시와 심리적 안정까지 반영한 영상 창작 모델로 3차 연속 수행의 필요성을 제시합니다.</p>
+				<div class="hero-grid">
+					<div class="panel">
+						<h3>핵심 제안 문장</h3>
+						<p>우리는 단순 교육기관이 아니라, <strong>자립청년이 콘텐츠 창작자로 성장하는 과정</strong>을 끝까지 함께하는 성장 플랫폼입니다.</p>
+						<div class="tag-row">
+							<span class="tag pill-strong">검증된 운영</span>
+							<span class="tag pill-strong">프라이버시 기반 교육</span>
+							<span class="tag pill-strong">콘텐츠 확산</span>
+						</div>
+						<div class="highlight">메시지: 교육이 끝나면 반드시 한 개 이상의 포트폴리오 결과물이 남는 구조</div>
+					</div>
+					<aside class="panel">
+						<h3>심사위원 관점 대응</h3>
+						<ul class="kpi-list">
+							<li><span>안정성</span><small>2년 연속 운영</small></li>
+							<li><span>차별성</span><small>얼굴 비노출 콘텐츠 모델</small></li>
+							<li><span>성과성</span><small>수료율, 포트폴리오, 취업 연계</small></li>
+							<li><span>CSR 적합성</span><small>스토리 기반 사회적 공감 확산</small></li>
+						</ul>
+					</aside>
+				</div>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 01" data-topic="문제 정의">
+				<span class="slide-number">2</span>
+				<h2>문제 정의: 왜 이 사업이 필요한가</h2>
+				<p class="lead">자립청년의 현실 문제는 기술 부족만이 아니라 관계 단절, 표현 기회 부족, 심리적 위축과 맞물려 있습니다.</p>
+				<div class="two-col">
+					<section class="panel list-block">
+						<h3>현장 관찰 이슈</h3>
+						<ul>
+							<li>카메라 노출 부담으로 자기표현 시작 자체가 어려운 참여자 존재</li>
+							<li>개별 상담과 정서적 지지 요구가 높은 참여자 다수</li>
+							<li>취업 준비 과정에서 자신감 결핍과 포트폴리오 공백 동시 발생</li>
+							<li>기술 교육만으로는 지속 참여를 담보하기 어려움</li>
+						</ul>
+					</section>
+					<section class="panel list-block">
+						<h3>해결 방향</h3>
+						<ul>
+							<li>심리적 안전을 전제로 한 프라이버시 기반 콘텐츠 제작</li>
+							<li>교육-상담-멘토링-성과공유를 하나로 연결한 운영 구조</li>
+							<li>완성 결과물 중심의 동기 부여와 사회적 공감 확산 설계</li>
+							<li>원장-담당교사-운영팀장 공동 지원 체계 강화</li>
+						</ul>
+					</section>
+				</div>
+				<div class="quote-block">
+					<h3>발표 키메시지</h3>
+					<p class="quote">누군가에게는 영상 교육이 아니라, 삶의 첫 걸음입니다.</p>
+				</div>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 01" data-topic="환경 분석">
+				<span class="slide-number">3</span>
+				<h2>시장성과 공익성: 콘텐츠는 새로운 자립 언어</h2>
+				<p class="lead">디지털 콘텐츠 시장 성장 흐름 속에서, 자립청년에게 영상 창작 역량은 자기표현과 진로 연결의 핵심 도구가 됩니다.</p>
+				<div class="matrix">
+					<h3 style="padding:14px 14px 0; margin:0;">콘텐츠 시대와 사업 적합성</h3>
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">환경 변화</th>
+								<th scope="col">사업 적용 포인트</th>
+								<th scope="col">기대 임팩트</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">숏폼/영상 플랫폼 확대</th>
+								<td>참여자 접근성이 높은 짧은 영상 중심 커리큘럼</td>
+								<td>초기 성취 경험을 빠르게 확보</td>
+							</tr>
+							<tr>
+								<th scope="row">개인 스토리 콘텐츠 수요 증가</th>
+								<td>자립 경험 기반 에세이/브이로그/정보형 콘텐츠 기획</td>
+								<td>사회적 공감 확산 및 인식 개선</td>
+							</tr>
+							<tr>
+								<th scope="row">실무형 포트폴리오 중요도 상승</th>
+								<td>과정 종료 시 결과물 기반 포트폴리오 정리</td>
+								<td>취업 연계와 진로 탐색 효율 향상</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 02" data-topic="수행 역량">
+				<span class="slide-number">4</span>
+				<h2>수행 신뢰성: 이미 검증된 운영기관</h2>
+				<p class="lead">작년 경쟁 3개 기관 환경에서도 2년 연속 수행을 통해 운영 안정성과 현장 대응력을 입증했습니다.</p>
+				<div class="two-col">
+					<section class="panel list-block">
+						<h3>운영 안정성 근거</h3>
+						<ul>
+							<li>2년 연속 동일 사업군 수행 경험</li>
+							<li>과정 중 이탈 방지 및 정서 지원 프로토콜 운영</li>
+							<li>원장, 담당교사, 운영팀장 삼각 지원체계</li>
+							<li>멘토 피드백 + 현장 상담 연계</li>
+						</ul>
+					</section>
+					<section class="panel">
+						<h3>성과 지표(제안 목표)</h3>
+						<ul class="kpi-list">
+							<li><span>수료율</span><small>90% 이상</small></li>
+							<li><span>포트폴리오</span><small>1인 5개 이상 콘텐츠</small></li>
+							<li><span>채널/작품 게시</span><small>참여자 100% 경험</small></li>
+							<li><span>진로/취업 연계</span><small>30% 이상</small></li>
+						</ul>
+					</section>
+				</div>
+				<div class="highlight">핵심: 단순 반복 운영이 아니라, 1년차 교육 → 2년차 제작 → 3년차 확산으로 고도화</div>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 02" data-topic="운영 모델">
+				<span class="slide-number">5</span>
+				<h2>프로그램 구조: 교육 → 제작 → 포트폴리오 → 확산</h2>
+				<p class="lead">아래 카드는 좌우 버튼으로 이동하며, 단계별 콘텐츠를 확인할 수 있습니다. 초급 수준 JavaScript로 구현된 카드 캐러셀입니다.</p>
+				<div class="flow">
+					<div class="flow-step"><strong>1단계</strong><p>영상 기초 및 심리적 안전한 참여 설계</p></div>
+					<div class="flow-step"><strong>2단계</strong><p>스토리 기획과 실습 중심 제작</p></div>
+					<div class="flow-step"><strong>3단계</strong><p>개인 포트폴리오 완성</p></div>
+					<div class="flow-step"><strong>4단계</strong><p>콘텐츠 공유 및 사회적 확산</p></div>
+				</div>
+
+				<section class="carousel-wrap">
+					<div class="carousel-header">
+						<h3>세부 프로그램 카드</h3>
+						<div class="carousel-controls">
+							<button class="control-btn" type="button" id="cardPrev" aria-label="이전 카드">&#x2039;</button>
+							<button class="control-btn" type="button" id="cardNext" aria-label="다음 카드">&#x203A;</button>
+						</div>
+					</div>
+					<div class="carousel-stage">
+						<div class="carousel-row" id="carouselRow">
+							<article class="program-card">
+								<strong>기초 촬영/편집</strong>
+								<p>비노출 촬영 기법을 포함한 안전한 시작 단계</p>
+								<ul>
+									<li>손/사물/환경 중심 프레이밍</li>
+									<li>모바일 편집 기본</li>
+									<li>짧은 컷 구성 연습</li>
+								</ul>
+							</article>
+							<article class="program-card">
+								<strong>스토리 콘텐츠 기획</strong>
+								<p>자립청년 개인 경험을 기반으로 한 주제 설계</p>
+								<ul>
+									<li>나의 하루, 나의 첫 도전</li>
+									<li>정보형/에세이형 선택</li>
+									<li>시나리오 초안 작성</li>
+								</ul>
+							</article>
+							<article class="program-card">
+								<strong>프로젝트 제작</strong>
+								<p>팀 단위 협업으로 실제 결과물 완성</p>
+								<ul>
+									<li>촬영-편집-피드백 반복</li>
+									<li>멘토 코칭</li>
+									<li>최종 영상 산출</li>
+								</ul>
+							</article>
+							<article class="program-card">
+								<strong>포트폴리오 완성</strong>
+								<p>개인별 결과물을 정리해 진로 연계 기반 확보</p>
+								<ul>
+									<li>작품 설명문 작성</li>
+									<li>강점 중심 편집본 구성</li>
+									<li>취업 연계 포맷 준비</li>
+								</ul>
+							</article>
+							<article class="program-card">
+								<strong>콘텐츠 확산</strong>
+								<p>사회공헌 관점의 공유 구조를 설계해 공감 확대</p>
+								<ul>
+									<li>상영회 또는 온라인 캠페인</li>
+									<li>기관 채널 협업</li>
+									<li>성과 스토리 아카이빙</li>
+								</ul>
+							</article>
+						</div>
+					</div>
+				</section>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 02" data-topic="차별화 전략">
+				<span class="slide-number">6</span>
+				<h2>차별성: 프라이버시 기반 영상 창작 교육</h2>
+				<p class="lead">참여자 얼굴 노출 부담을 고려해, 비출연형 콘텐츠 제작을 표준 옵션으로 설계합니다.</p>
+				<div class="two-col">
+					<section class="panel">
+						<h3>기존 교육의 한계</h3>
+						<ul class="kpi-list">
+							<li><span>카메라 부담</span><small>참여 시작 장벽 증가</small></li>
+							<li><span>획일형 과제</span><small>개인 맥락 반영 부족</small></li>
+							<li><span>중도 이탈 위험</span><small>심리적 압박 누적</small></li>
+						</ul>
+					</section>
+					<section class="panel">
+						<h3>우리 모델의 전환</h3>
+						<ul class="kpi-list">
+							<li><span>손/사물/환경 중심 촬영</span><small>얼굴 비노출 제작 가능</small></li>
+							<li><span>나레이션/화면녹화 활용</span><small>자기표현 방식 다양화</small></li>
+							<li><span>정서 지원 연계 운영</span><small>안정적 참여 유지</small></li>
+						</ul>
+					</section>
+				</div>
+				<div class="highlight">한 줄 메시지: 참여자의 프라이버시를 존중할수록, 자기표현의 깊이는 더 커집니다.</div>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 03" data-topic="돌봄 운영체계">
+				<span class="slide-number">7</span>
+				<h2>돌봄 운영체계: 함께 다독이고 함께 완주합니다</h2>
+				<p class="lead">원장, 담당선생님, 운영팀장, 멘토가 역할을 나눠 참여자의 시작과 끝을 지지하는 운영모델입니다.</p>
+				<section class="stack-wrap">
+					<h3>겹쳐진 카드형 역할 구조</h3>
+					<p class="stack-help">카드를 클릭하면 앞으로 이동합니다. 겹침 구조는 CSS + 기초 JavaScript로 구현했습니다.</p>
+					<div class="stack-stage" id="stackStage">
+						<article class="stack-card card-a active" data-role="director">
+							<h4>원장님: 방향성과 보호자 역할</h4>
+							<p>과정 전체의 가치와 목표를 제시하고, 참여자에게 심리적 안전감과 신뢰를 제공합니다.</p>
+						</article>
+						<article class="stack-card card-b" data-role="teacher">
+							<h4>담당선생님: 학습 코칭과 정서 지지</h4>
+							<p>개별 학습 속도에 맞춰 과제를 조정하고, 중도 포기 구간에서 지속 참여를 이끕니다.</p>
+						</article>
+						<article class="stack-card card-c" data-role="manager">
+							<h4>운영팀장/멘토: 실행 관리와 결과 완성</h4>
+							<p>일정, 성과, 외부 연계를 관리하며 결과물의 완성도와 진로 연결을 돕습니다.</p>
+						</article>
+					</div>
+				</section>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 03" data-topic="확산 시나리오">
+				<span class="slide-number">8</span>
+				<h2>성과 확산 시나리오: 제일기획 CSR 정렬</h2>
+				<p class="lead">교육의 종료가 아니라 공감 확산으로 이어지는 캠페인형 설계를 제안합니다.</p>
+				<section class="story-strip">
+					<h3>캠페인 구조 예시: 나의 첫 자립 이야기</h3>
+					<div class="story-steps">
+						<div class="story-step"><strong>내부 상영</strong><p>참여자와 실무진이 함께 결과물 관람 및 피드백</p></div>
+						<div class="story-step"><strong>온라인 공유</strong><p>개인정보를 보호한 편집본을 기관 채널에서 확산</p></div>
+						<div class="story-step"><strong>성과 아카이브</strong><p>연차별 누적 결과로 프로그램 지속가능성 제시</p></div>
+					</div>
+				</section>
+				<div class="matrix">
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">확산 영역</th>
+								<th scope="col">실행 방식</th>
+								<th scope="col">기대 효과</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">기관 내 확산</th>
+								<td>성과 공유회, 포트폴리오 발표</td>
+								<td>참여자 자존감 강화</td>
+							</tr>
+							<tr>
+								<th scope="row">대외 확산</th>
+								<td>캠페인형 콘텐츠, 스토리 카드뉴스</td>
+								<td>사회적 공감과 브랜드 임팩트</td>
+							</tr>
+							<tr>
+								<th scope="row">운영 확산</th>
+								<td>표준 운영 가이드 축적</td>
+								<td>차년도 안정성 증명</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</article>
+
+			<article class="slide" data-chapter="CHAPTER 04" data-topic="클로징 영상 구성">
+				<span class="slide-number">9</span>
+				<h2>클로징 영상 콘티(사진 기반 60-70초)</h2>
+				<p class="lead">프롬프트 분석 결과를 반영한 감정형 엔딩 시나리오입니다. 시작-불안-도전-완성-희망의 감정 곡선으로 구성합니다.</p>
+				<div class="matrix">
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">컷</th>
+								<th scope="col">이미지 키워드(무료사진)</th>
+								<th scope="col">자막</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1 시작</th>
+								<td>empty classroom, quiet desk</td>
+								<td>어떤 시작은 조금 더 많은 용기가 필요합니다</td>
+							</tr>
+							<tr>
+								<th scope="row">2 불안</th>
+								<td>window notebook hands</td>
+								<td>누군가는 세상 밖으로 나오는 것이 쉽지 않았습니다</td>
+							</tr>
+							<tr>
+								<th scope="row">3 만남</th>
+								<td>students computer class</td>
+								<td>그래서 우리는 함께 배우기 시작했습니다</td>
+							</tr>
+							<tr>
+								<th scope="row">4 도전</th>
+								<td>typing laptop, editing timeline</td>
+								<td>작은 영상 하나도 큰 도전이었습니다</td>
+							</tr>
+							<tr>
+								<th scope="row">5 완성</th>
+								<td>video rendering screen</td>
+								<td>그리고 누군가는 자신의 첫 영상을 완성했습니다</td>
+							</tr>
+							<tr>
+								<th scope="row">6 전환</th>
+								<td>letter paper, handwriting</td>
+								<td>우리에게는 함께 격려한 시간들이 남았습니다</td>
+							</tr>
+							<tr>
+								<th scope="row">7 희망</th>
+								<td>sunset sky hope</td>
+								<td>우리는 이미 두 번의 이야기를 만들었습니다. 이제 세 번째 이야기를 시작합니다</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</article>
+
+			<article class="slide top-hero" data-chapter="CHAPTER 04" data-topic="최종 제안">
+				<span class="slide-number">10</span>
+				<h2>최종 제안: 검증된 기관, 진화된 프로그램, 이어지는 이야기</h2>
+				<p class="lead">경쟁기관이 3곳인 환경에서 선택 기준은 안정성과 차별성입니다. 우리는 이미 증명했고, 이번에는 더 고도화된 방식으로 성과를 확장하겠습니다.</p>
+				<div class="hero-grid">
+					<section class="panel">
+						<h3>선정 필요성 3가지</h3>
+						<ul class="kpi-list">
+							<li><span>검증된 수행력</span><small>2년 연속 운영 경험</small></li>
+							<li><span>차별화 모델</span><small>프라이버시 기반 창작 교육</small></li>
+							<li><span>사회적 임팩트</span><small>콘텐츠 확산형 CSR 구조</small></li>
+						</ul>
+					</section>
+					<section class="panel">
+						<h3>클로징 멘트(원장님 스타일 반영)</h3>
+						<p class="quote" style="font-size:1.3rem; color:#3f2a07; margin-bottom:10px;">
+							딱 세 숟갈만 더 먹자고 말해주던 마음으로,
+							우리는 다시 시작합니다.
+						</p>
+						<div class="highlight">자립청년의 이야기가 콘텐츠가 되고, 그 콘텐츠가 사회의 공감으로 확산되도록 세 번째 여정을 함께 만들겠습니다.</div>
+					</section>
+				</div>
+			</article>
+		</section>
+
+		<nav class="slide-nav" id="slideNav" aria-label="슬라이드 이동"></nav>
+		<p class="hint">팁: 가로 스크롤, 상단 이전/다음 버튼, 하단 번호 버튼으로 이동할 수 있습니다.</p>
+		<p class="tone-note">PDF 스타일 정밀 반영: 상단 챕터 밴드 + eGov 블루 톤 + 표준/기관 커스텀 토글</p>
+		<section class="resource-panel" aria-label="발표 부가자료">
+			<h3>발표 부가자료</h3>
+			<div class="resource-links">
+				<a href="greensw_selfstand_v0.1_script.md">슬라이드별 발표 스크립트</a>
+				<a href="greensw_selfstand_v0.1_closing.srt">클로징 영상 자막 SRT</a>
+				<a href="greensw_selfstand_v0.1_cut_timeline.md">클로징 영상 컷 타임코드</a>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		const themeToggle = document.getElementById("toggleTheme");
+		const rootBody = document.body;
+
+		function applySavedTheme() {
+			const saved = localStorage.getItem("greensw-slide-theme") || "egov";
+			if (saved === "ci") {
+				rootBody.setAttribute("data-style", "ci");
+				themeToggle.textContent = "기관 톤 적용 중";
+			} else {
+				rootBody.removeAttribute("data-style");
+				themeToggle.textContent = "표준 톤 적용 중";
+			}
+		}
+
+		themeToggle.addEventListener("click", () => {
+			const isCi = rootBody.getAttribute("data-style") === "ci";
+			if (isCi) {
+				rootBody.removeAttribute("data-style");
+				localStorage.setItem("greensw-slide-theme", "egov");
+				themeToggle.textContent = "표준 톤 적용 중";
+			} else {
+				rootBody.setAttribute("data-style", "ci");
+				localStorage.setItem("greensw-slide-theme", "ci");
+				themeToggle.textContent = "기관 톤 적용 중";
+			}
+		});
+
+		applySavedTheme();
+
+		const track = document.getElementById("slideTrack");
+		const slides = Array.from(track.children);
+		const nav = document.getElementById("slideNav");
+		const prevSlideBtn = document.getElementById("prevSlide");
+		const nextSlideBtn = document.getElementById("nextSlide");
+
+		let currentSlide = 0;
+
+		function goToSlide(index) {
+			const safeIndex = Math.max(0, Math.min(index, slides.length - 1));
+			const targetX = safeIndex * track.clientWidth;
+			track.scrollTo({ left: targetX, behavior: "smooth" });
+			currentSlide = safeIndex;
+			updateDots();
+		}
+
+		function updateDots() {
+			const dots = nav.querySelectorAll(".dot");
+			dots.forEach((dot, i) => {
+				dot.classList.toggle("active", i === currentSlide);
+			});
+		}
+
+		slides.forEach((_, i) => {
+			const dot = document.createElement("button");
+			dot.type = "button";
+			dot.className = "dot";
+			dot.textContent = String(i + 1);
+			dot.addEventListener("click", () => goToSlide(i));
+			nav.appendChild(dot);
+		});
+
+		prevSlideBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
+		nextSlideBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
+
+		track.addEventListener("scroll", () => {
+			const idx = Math.round(track.scrollLeft / track.clientWidth);
+			if (idx !== currentSlide) {
+				currentSlide = idx;
+				updateDots();
+			}
+		});
+
+		window.addEventListener("resize", () => goToSlide(currentSlide));
+		updateDots();
+
+		const row = document.getElementById("carouselRow");
+		const cardPrev = document.getElementById("cardPrev");
+		const cardNext = document.getElementById("cardNext");
+		const cards = Array.from(row.children);
+		const cardWidth = 314;
+		let cardIndex = 0;
+
+		function moveCards() {
+			const maxIndex = Math.max(0, cards.length - 3);
+			cardIndex = Math.max(0, Math.min(cardIndex, maxIndex));
+			row.style.transform = "translateX(" + (-cardIndex * cardWidth) + "px)";
+		}
+
+		cardPrev.addEventListener("click", () => {
+			cardIndex -= 1;
+			moveCards();
+		});
+
+		cardNext.addEventListener("click", () => {
+			cardIndex += 1;
+			moveCards();
+		});
+
+		window.addEventListener("resize", moveCards);
+		moveCards();
+
+		const stackCards = Array.from(document.querySelectorAll(".stack-card"));
+		let topZ = 10;
+
+		stackCards.forEach((card) => {
+			card.addEventListener("click", () => {
+				stackCards.forEach((item) => item.classList.remove("active"));
+				card.classList.add("active");
+				topZ += 1;
+				card.style.zIndex = String(topZ);
+			});
+		});
+	</script>
+</body>
+</html>

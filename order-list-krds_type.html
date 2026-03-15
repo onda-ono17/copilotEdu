@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>정부서비스형 주문 목록 및 주문 신청</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      --color-primary: #003675;
+      --color-primary-strong: #002a5c;
+      --color-primary-soft: #e8f0fb;
+      --color-accent: #0f8b8d;
+      --color-bg: #f4f6f8;
+      --color-surface: #ffffff;
+      --color-surface-alt: #f8fafc;
+      --color-border: #d8dde3;
+      --color-border-strong: #8a949e;
+      --color-text: #111111;
+      --color-text-muted: #505a63;
+      --color-danger: #c62828;
+      --color-danger-soft: #fdeeee;
+      --color-success: #146c2e;
+      --color-success-soft: #edf7ef;
+      --color-warning: #8a5a00;
+      --color-warning-soft: #fff6df;
+      --color-info: #0b5cab;
+      --color-info-soft: #edf5ff;
+      --shadow-sm: 0 2px 8px rgba(17, 17, 17, 0.06);
+      --shadow-md: 0 12px 28px rgba(17, 17, 17, 0.08);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --container: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: "Noto Sans KR", sans-serif;
+      color: var(--color-text);
+      background:
+        linear-gradient(180deg, rgba(232, 240, 251, 0.95) 0, rgba(232, 240, 251, 0.95) 72px, transparent 72px),
+        linear-gradient(180deg, #f9fbfd 0%, #f4f6f8 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 16px;
+      z-index: 1000;
+      padding: 12px 16px;
+      background: var(--color-text);
+      color: #ffffff;
+      border-radius: 10px;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .gov-banner {
+      background: #eff3f7;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .gov-banner-inner,
+    .site-header-inner,
+    .hero-inner,
+    .main-layout,
+    .footer-inner {
+      width: min(calc(100% - 32px), var(--container));
+      margin: 0 auto;
+    }
+
+    .gov-banner-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      font-size: 0.94rem;
+      color: var(--color-text-muted);
+    }
+
+    .gov-banner strong {
+      color: var(--color-text);
+    }
+
+    .site-header {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 1px 0 rgba(17, 17, 17, 0.02);
+    }
+
+    .site-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--color-primary) 0%, #0b5cab 100%);
+      color: #ffffff;
+      font-size: 1.3rem;
+      font-weight: 800;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .header-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      background: var(--color-surface-alt);
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at right top, rgba(15, 139, 141, 0.14), transparent 28%),
+        linear-gradient(135deg, #0b3c7d 0%, #003675 55%, #0a4a92 100%);
+      color: #ffffff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -140px -160px auto;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-inner {
+      padding: 20px 0 42px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      margin: 0 0 18px;
+      list-style: none;
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .breadcrumb li:not(:last-child)::after {
+      content: ">";
+      margin-left: 8px;
+      opacity: 0.7;
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .hero-copy h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy p {
+      max-width: 760px;
+      margin: 0 0 22px;
+      font-size: 1.03rem;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 0.92rem;
+    }
+
+    .hero-side {
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 1.06rem;
+    }
+
+    .hero-side ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .hero-side li + li {
+      margin-top: 8px;
+    }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      padding: 28px 0 56px;
+    }
+
+    .side-panel,
+    .content-panel,
+    .notice-box,
+    .status-strip,
+    .table-panel,
+    .form-panel,
+    .guide-card,
+    .summary-card,
+    .footer-panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 16px;
+      align-self: start;
+      padding: 20px;
+    }
+
+    .side-panel h2 {
+      margin: 0 0 14px;
+      font-size: 1.02rem;
+    }
+
+    .section-nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .section-nav a {
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: var(--color-text);
+      background: var(--color-surface-alt);
+      border: 1px solid transparent;
+      font-weight: 500;
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus {
+      border-color: var(--color-primary);
+      background: var(--color-primary-soft);
+      text-decoration: none;
+    }
+
+    .guide-card {
+      margin-top: 18px;
+      padding: 18px;
+      background: linear-gradient(180deg, #fbfdff 0%, #f4f9fd 100%);
+    }
+
+    .guide-card h3,
+    .notice-box h2,
+    .content-section h2,
+    .table-head h2,
+    .form-head h2,
+    .summary-card h3,
+    .footer-panel h2 {
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .guide-card p,
+    .notice-box p,
+    .content-section p,
+    .summary-card p,
+    .footer-panel p {
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 20px;
+    }
+
+    .notice-box {
+      padding: 20px 22px;
+      border-left: 6px solid var(--color-info);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .notice-box ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--color-text-muted);
+    }
+
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .status-item {
+      padding: 20px;
+      border-right: 1px solid var(--color-border);
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
+    }
+
+    .status-item:last-child {
+      border-right: none;
+    }
+
+    .status-label {
+      display: block;
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .status-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .content-section {
+      display: grid;
+      gap: 16px;
+    }
+
+    .table-panel,
+    .form-panel {
+      overflow: hidden;
+    }
+
+    .table-head,
+    .form-head {
+      padding: 24px 24px 18px;
+      border-bottom: 1px solid var(--color-border);
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
+    }
+
+    .table-head p,
+    .form-head p {
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+
+    .search-form {
+      padding: 20px 24px;
+      display: grid;
+      gap: 16px;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface-alt);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field,
+    .field-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label,
+    .field legend,
+    .field-group label,
+    .fieldset-title {
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .required {
+      color: var(--color-danger);
+      margin-left: 4px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea,
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--color-text);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus,
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus,
+    .chip-radio input:focus + label,
+    .check-row input:focus + label {
+      outline: 3px solid rgba(11, 92, 171, 0.18);
+      outline-offset: 1px;
+      border-color: var(--color-info);
+    }
+
+    .field small,
+    .field-group small,
+    .helper-text {
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+    }
+
+    .search-actions,
+    .button-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-actions .button-group,
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 11px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-strong);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-primary-soft);
+    }
+
+    .btn-tertiary {
+      background: var(--color-surface-alt);
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+
+    .btn-tertiary:hover {
+      background: #eef2f6;
+    }
+
+    .btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .filter-tags {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      padding: 0 24px 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 980px;
+      border-collapse: collapse;
+    }
+
+    caption {
+      padding: 18px 0 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    thead th {
+      padding: 14px 12px;
+      text-align: left;
+      font-size: 0.96rem;
+      border-top: 1px solid var(--color-border-strong);
+      border-bottom: 1px solid var(--color-border-strong);
+      background: #f7f9fb;
+    }
+
+    tbody th,
+    tbody td {
+      padding: 16px 12px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    tbody tr:hover {
+      background: #fafcff;
+    }
+
+    .num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 84px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .status-badge.ready {
+      color: var(--color-info);
+      background: var(--color-info-soft);
+    }
+
+    .status-badge.done {
+      color: var(--color-success);
+      background: var(--color-success-soft);
+    }
+
+    .status-badge.hold {
+      color: var(--color-warning);
+      background: var(--color-warning-soft);
+    }
+
+    .status-badge.cancel {
+      color: var(--color-danger);
+      background: var(--color-danger-soft);
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 18px 24px 24px;
+    }
+
+    .pagination-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .page-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      padding: 0 10px;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--color-text);
+      font-weight: 700;
+    }
+
+    .page-link.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #ffffff;
+    }
+
+    .step-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface-alt);
+    }
+
+    .step-item {
+      position: relative;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+    }
+
+    .step-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+    }
+
+    .step-item span {
+      display: block;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .step-item.active {
+      border-color: var(--color-primary);
+      background: var(--color-primary-soft);
+      box-shadow: inset 0 0 0 1px rgba(0, 54, 117, 0.08);
+    }
+
+    .form-body {
+      padding: 24px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .fieldset {
+      display: grid;
+      gap: 16px;
+      padding: 22px;
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+    }
+
+    .fieldset-header {
+      display: grid;
+      gap: 6px;
+    }
+
+    .fieldset-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .span-2 {
+      grid-column: span 2;
+    }
+
+    .chip-radio-group,
+    .check-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip-radio,
+    .check-row {
+      position: relative;
+    }
+
+    .chip-radio input,
+    .check-row input {
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+    }
+
+    .chip-radio label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--color-border-strong);
+      background: #ffffff;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .chip-radio input:checked + label {
+      border-color: var(--color-primary);
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .check-row label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      color: var(--color-text);
+    }
+
+    .check-row label::before {
+      content: "";
+      flex: none;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      border-radius: 6px;
+      border: 2px solid var(--color-border-strong);
+      background: #ffffff;
+    }
+
+    .check-row input:checked + label {
+      border-color: var(--color-primary);
+      background: #f7fbff;
+    }
+
+    .check-row input:checked + label::before {
+      border-color: var(--color-primary);
+      background: linear-gradient(135deg, var(--color-primary) 0%, #0b5cab 100%);
+      box-shadow: inset 0 0 0 3px #ffffff;
+    }
+
+    .inline-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .summary-card {
+      padding: 20px 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f9fd 100%);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 18px;
+      margin-top: 14px;
+    }
+
+    .summary-grid div {
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .summary-grid strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+    }
+
+    .summary-grid span {
+      display: block;
+      font-weight: 700;
+    }
+
+    .error-message {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid #ef9a9a;
+      background: var(--color-danger-soft);
+      color: #7f1d1d;
+      font-weight: 500;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .footer-panel {
+      padding: 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+    }
+
+    .footer-panel ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--color-text-muted);
+    }
+
+    .site-footer {
+      padding: 0 0 32px;
+    }
+
+    .footer-inner {
+      color: var(--color-text-muted);
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .main-layout,
+      .fieldset-grid,
+      .form-grid,
+      .summary-grid,
+      .status-strip,
+      .step-list {
+        grid-template-columns: 1fr;
+      }
+
+      .status-item {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .status-item:last-child {
+        border-bottom: none;
+      }
+
+      .side-panel {
+        position: static;
+      }
+
+      .span-2 {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .gov-banner-inner,
+      .site-header-inner,
+      .search-actions,
+      .pagination,
+      .button-row {
+        align-items: flex-start;
+      }
+
+      .gov-banner-inner,
+      .site-header-inner {
+        flex-direction: column;
+      }
+
+      .main-layout,
+      .hero-inner,
+      .footer-inner {
+        width: min(calc(100% - 24px), var(--container));
+      }
+
+      .hero-inner {
+        padding-bottom: 32px;
+      }
+
+      .table-head,
+      .form-head,
+      .search-form,
+      .step-list,
+      .form-body,
+      .pagination,
+      .footer-panel,
+      .summary-card,
+      .notice-box,
+      .side-panel {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .inline-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .button-group,
+      .header-actions {
+        width: 100%;
+      }
+
+      .button-group .btn,
+      .header-actions a,
+      .search-actions .button-group .btn,
+      .button-row .button-group .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">본문 바로가기</a>
+
+  <div class="gov-banner" role="region" aria-label="대한민국 정부 서비스 안내">
+    <div class="gov-banner-inner">
+      <div><strong>대한민국 정부서비스 예시 화면</strong> 전자정부 UI/UX 가이드라인 구조를 참고하여 구성한 주문 서비스입니다.</div>
+      <a href="#service-guide">서비스 이용 안내 바로가기</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand" aria-label="주문 서비스">
+        <div class="brand-mark" aria-hidden="true">주문</div>
+        <div class="brand-text">
+          <strong>공공 조달 주문 서비스</strong>
+          <span>주문 현황 조회와 신청 접수를 한 화면에서 처리합니다.</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a class="header-link" href="#order-list">주문 목록 조회</a>
+        <a class="header-link" href="#order-apply">주문 신청</a>
+        <a class="header-link" href="#recent-status">처리 단계 안내</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <ol class="breadcrumb" aria-label="현재 위치">
+        <li><a href="#">홈</a></li>
+        <li><a href="#">민원·신청</a></li>
+        <li>공공 조달 주문 서비스</li>
+      </ol>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-title">주문 목록 확인부터 주문 신청까지<br />쉽고 명확하게 처리할 수 있도록 구성했습니다.</h1>
+          <p>KRDS의 목록 탐색, 입력폼, 신청 서비스 패턴을 반영해 검색과 필터는 단순하게, 신청서는 단계와 섹션을 명확하게 나누고, 상태와 안내 정보는 한눈에 파악할 수 있도록 배치했습니다.</p>
+          <div class="hero-meta" aria-label="핵심 안내">
+            <span>평일 09:00~18:00 접수</span>
+            <span>임시저장 7일 유지</span>
+            <span>신청 후 처리상태 조회 가능</span>
+          </div>
+        </div>
+        <aside class="hero-side" aria-labelledby="hero-side-title">
+          <h2 id="hero-side-title">이 화면에 반영한 KRDS 핵심 원칙</h2>
+          <ul>
+            <li>반복 영역은 건너뛰기 링크와 명확한 헤딩으로 접근성을 확보</li>
+            <li>입력폼은 단일 열 중심으로 그룹화하고 필수 항목과 도움말을 분명히 제공</li>
+            <li>목록은 검색, 필터, 표 캡션, 상태 배지, 페이지네이션을 함께 제공</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="main-layout">
+    <aside class="side-panel" id="service-guide">
+      <h2>이 페이지 구성</h2>
+      <nav class="section-nav" aria-label="페이지 내 탐색">
+        <a href="#order-list">주문 목록 조회</a>
+        <a href="#order-apply">주문 신청서 작성</a>
+        <a href="#recent-status">처리 단계 및 확인사항</a>
+      </nav>
+      <section class="guide-card" aria-labelledby="guide-card-title">
+        <h3 id="guide-card-title">작성 전 확인</h3>
+        <p>필수 항목을 먼저 확인하고, 필요한 경우 첨부파일을 준비한 뒤 신청서를 작성하면 더 빠르게 접수할 수 있습니다.</p>
+      </section>
+    </aside>
+
+    <main id="main-content" class="content-stack">
+      <section class="notice-box" aria-labelledby="notice-title">
+        <h2 id="notice-title">안내</h2>
+        <p>주문 신청은 제출 전 최종 확인 단계가 제공되며, 제출 이후에는 주문번호를 기준으로 처리 상태를 확인할 수 있습니다.</p>
+        <ul>
+          <li>필수 입력 항목은 붉은색 표시로 구분했습니다.</li>
+          <li>임시저장을 이용하면 작성 중인 신청서를 나중에 이어서 작성할 수 있습니다.</li>
+          <li>첨부파일이 필요한 경우 PDF, JPG, PNG 파일만 등록할 수 있도록 설계했습니다.</li>
+        </ul>
+      </section>
+
+      <section class="status-strip" aria-label="주문 처리 현황">
+        <div class="status-item">
+          <span class="status-label">전체 주문</span>
+          <strong class="status-value">248건</strong>
+        </div>
+        <div class="status-item">
+          <span class="status-label">접수 완료</span>
+          <strong class="status-value">132건</strong>
+        </div>
+        <div class="status-item">
+          <span class="status-label">검토 보류</span>
+          <strong class="status-value">18건</strong>
+        </div>
+        <div class="status-item">
+          <span class="status-label">오늘 신규 신청</span>
+          <strong class="status-value">24건</strong>
+        </div>
+      </section>
+
+      <section id="order-list" class="content-section" aria-labelledby="order-list-title">
+        <div class="table-panel">
+          <div class="table-head">
+            <h2 id="order-list-title">주문 목록 조회</h2>
+            <p>주문번호, 신청기관, 품목, 상태를 기준으로 현재 접수 및 처리 현황을 확인할 수 있습니다.</p>
+          </div>
+
+          <form class="search-form" action="#" method="get">
+            <div class="form-grid">
+              <div class="field span-2">
+                <label for="search-keyword">검색어</label>
+                <input id="search-keyword" name="searchKeyword" type="search" placeholder="주문번호 또는 신청기관명을 입력하세요" />
+                <small>정확한 주문번호를 알고 있는 경우 가장 빠르게 검색할 수 있습니다.</small>
+              </div>
+              <div class="field">
+                <label for="status-filter">처리상태</label>
+                <select id="status-filter" name="status">
+                  <option>전체</option>
+                  <option>접수 완료</option>
+                  <option>검토 중</option>
+                  <option>보류</option>
+                  <option>취소</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="period-filter">신청기간</label>
+                <select id="period-filter" name="period">
+                  <option>최근 1개월</option>
+                  <option>최근 3개월</option>
+                  <option>최근 6개월</option>
+                  <option>직접 선택</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-actions">
+              <div class="filter-tags" aria-label="적용 가능한 빠른 필터">
+                <span class="filter-tag">긴급건 우선 확인</span>
+                <span class="filter-tag">첨부 보완 필요</span>
+                <span class="filter-tag">오늘 처리 예정</span>
+              </div>
+              <div class="button-group">
+                <button class="btn btn-tertiary" type="reset">초기화</button>
+                <button class="btn btn-primary" type="submit">검색</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-scroll" role="region" aria-label="주문 목록 표 영역" tabindex="0">
+            <table>
+              <caption>주문 목록 표입니다. 주문번호, 신청일, 신청기관, 품목, 수량, 금액, 처리상태, 확인으로 구성되어 있습니다.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">주문번호</th>
+                  <th scope="col">신청일</th>
+                  <th scope="col">신청기관</th>
+                  <th scope="col">품목</th>
+                  <th scope="col" class="num">수량</th>
+                  <th scope="col" class="num">금액</th>
+                  <th scope="col">처리상태</th>
+                  <th scope="col">확인</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">ORD-20260315-017</th>
+                  <td>2026.03.15 09:10</td>
+                  <td>서울교육지원청</td>
+                  <td>교사용 태블릿 10형</td>
+                  <td class="num">12</td>
+                  <td class="num">8,400,000원</td>
+                  <td><span class="status-badge ready">검토 중</span></td>
+                  <td><a href="#order-apply">신청 내용 보기</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">ORD-20260314-203</th>
+                  <td>2026.03.14 16:40</td>
+                  <td>부산시청 정보담당관</td>
+                  <td>업무용 노트북 세트</td>
+                  <td class="num">8</td>
+                  <td class="num">12,800,000원</td>
+                  <td><span class="status-badge done">접수 완료</span></td>
+                  <td><a href="#recent-status">처리 단계 확인</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">ORD-20260313-154</th>
+                  <td>2026.03.13 14:22</td>
+                  <td>경기도청 민원실</td>
+                  <td>민원 창구 프린터</td>
+                  <td class="num">3</td>
+                  <td class="num">1,260,000원</td>
+                  <td><span class="status-badge hold">보류</span></td>
+                  <td><a href="#validation-message">보완 필요</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">ORD-20260312-117</th>
+                  <td>2026.03.12 11:05</td>
+                  <td>대전광역시 교육청</td>
+                  <td>회의용 스피커폰</td>
+                  <td class="num">5</td>
+                  <td class="num">2,050,000원</td>
+                  <td><span class="status-badge done">접수 완료</span></td>
+                  <td><a href="#order-apply">재신청</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">ORD-20260311-098</th>
+                  <td>2026.03.11 09:30</td>
+                  <td>인천시청 복지정책과</td>
+                  <td>공용 모니터 27형</td>
+                  <td class="num">-</td>
+                  <td class="num">-</td>
+                  <td><span class="status-badge cancel">취소</span></td>
+                  <td><a href="#order-apply">사유 확인</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" aria-label="목록 페이지 이동">
+            <p>총 248건 중 1페이지 1-5건을 보고 있습니다.</p>
+            <div class="pagination-links">
+              <a class="page-link" href="#">이전</a>
+              <a class="page-link active" href="#" aria-current="page">1</a>
+              <a class="page-link" href="#">2</a>
+              <a class="page-link" href="#">3</a>
+              <a class="page-link" href="#">4</a>
+              <a class="page-link" href="#">다음</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="order-apply" class="content-section" aria-labelledby="order-apply-title">
+        <div class="form-panel">
+          <div class="form-head">
+            <h2 id="order-apply-title">주문 신청서 작성</h2>
+            <p>신청서는 단계별 진행 상태를 확인하면서 작성할 수 있으며, 필수 항목을 모두 입력한 뒤 확인 단계로 이동합니다.</p>
+          </div>
+
+          <ol class="step-list" aria-label="주문 신청 단계">
+            <li class="step-item">
+              <strong>1단계</strong>
+              <span>신청 서비스 선택</span>
+            </li>
+            <li class="step-item active" aria-current="step">
+              <strong>2단계</strong>
+              <span>신청 정보 입력</span>
+            </li>
+            <li class="step-item">
+              <strong>3단계</strong>
+              <span>신청 내용 확인</span>
+            </li>
+            <li class="step-item">
+              <strong>4단계</strong>
+              <span>제출 완료</span>
+            </li>
+          </ol>
+
+          <form class="form-body" id="order-form" action="#" method="post" novalidate>
+            <div id="validation-message" class="error-message" role="alert" aria-live="assertive">필수 항목을 모두 입력하고 개인정보 수집 안내를 확인해 주세요.</div>
+
+            <section class="fieldset" aria-labelledby="applicant-title">
+              <div class="fieldset-header">
+                <h3 class="fieldset-title" id="applicant-title">신청인 정보</h3>
+                <p class="helper-text">로그인된 사용자 정보를 기본값으로 불러오는 구조를 가정한 예시입니다.</p>
+              </div>
+              <div class="fieldset-grid">
+                <div class="field">
+                  <label for="agency-name">신청기관명<span class="required">*</span></label>
+                  <input id="agency-name" name="agencyName" type="text" value="서울교육지원청" autocomplete="organization" required />
+                </div>
+                <div class="field">
+                  <label for="applicant-name">담당자명<span class="required">*</span></label>
+                  <input id="applicant-name" name="applicantName" type="text" value="김민지" autocomplete="name" required />
+                </div>
+                <div class="field">
+                  <label for="phone">연락처<span class="required">*</span></label>
+                  <input id="phone" name="phone" type="tel" value="02-2100-1234" autocomplete="tel" required />
+                </div>
+                <div class="field">
+                  <label for="email">전자우편<span class="required">*</span></label>
+                  <input id="email" name="email" type="email" value="minji.kim@gov.example" autocomplete="email" required />
+                </div>
+              </div>
+            </section>
+
+            <section class="fieldset" aria-labelledby="order-info-title">
+              <div class="fieldset-header">
+                <h3 class="fieldset-title" id="order-info-title">주문 정보</h3>
+                <p class="helper-text">한 번에 여러 건을 신청하는 경우 품목별로 신청서를 분리하면 검토가 더 빠릅니다.</p>
+              </div>
+              <div class="fieldset-grid">
+                <div class="field span-2">
+                  <label for="service-type">신청 유형<span class="required">*</span></label>
+                  <div class="chip-radio-group" role="radiogroup" aria-label="신청 유형 선택">
+                    <div class="chip-radio">
+                      <input id="service-submit" type="radio" name="serviceType" checked />
+                      <label for="service-submit">신규 주문 신청</label>
+                    </div>
+                    <div class="chip-radio">
+                      <input id="service-change" type="radio" name="serviceType" />
+                      <label for="service-change">변경 신청</label>
+                    </div>
+                    <div class="chip-radio">
+                      <input id="service-reapply" type="radio" name="serviceType" />
+                      <label for="service-reapply">재신청</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="item-name">품목명<span class="required">*</span></label>
+                  <select id="item-name" name="itemName" required>
+                    <option value="">선택하세요</option>
+                    <option selected>교사용 태블릿 10형</option>
+                    <option>업무용 노트북 세트</option>
+                    <option>회의용 스피커폰</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="quantity">수량<span class="required">*</span></label>
+                  <input id="quantity" name="quantity" type="number" min="1" step="1" value="12" required />
+                  <small>단위: 개</small>
+                </div>
+                <div class="field">
+                  <label for="budget">예상 금액<span class="required">*</span></label>
+                  <input id="budget" name="budget" type="text" value="8,400,000원" required />
+                </div>
+                <div class="field">
+                  <label for="request-date">납품 요청일<span class="required">*</span></label>
+                  <input id="request-date" name="requestDate" type="date" value="2026-03-25" required />
+                </div>
+                <div class="field span-2">
+                  <label class="field-label">수령 방식<span class="required">*</span></label>
+                  <div class="chip-radio-group" role="radiogroup" aria-label="수령 방식 선택">
+                    <div class="chip-radio">
+                      <input id="delivery-direct" type="radio" name="deliveryType" checked />
+                      <label for="delivery-direct">기관 직접 수령</label>
+                    </div>
+                    <div class="chip-radio">
+                      <input id="delivery-shipping" type="radio" name="deliveryType" />
+                      <label for="delivery-shipping">지정 주소 배송</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="field span-2">
+                  <label for="attachment">첨부파일</label>
+                  <input id="attachment" name="attachment" type="file" accept=".pdf,.jpg,.jpeg,.png" />
+                  <small>구매 요청서, 내부 결재 문서 등 증빙자료를 첨부할 수 있습니다.</small>
+                </div>
+              </div>
+            </section>
+
+            <section class="fieldset" aria-labelledby="delivery-info-title">
+              <div class="fieldset-header">
+                <h3 class="fieldset-title" id="delivery-info-title">배송 및 요청사항</h3>
+                <p class="helper-text">주소 정보는 정확히 입력해야 하며, 상세 장소와 수령 가능 시간을 함께 작성하는 것을 권장합니다.</p>
+              </div>
+              <div class="fieldset-grid">
+                <div class="field span-2">
+                  <label for="postal-address">배송지 주소<span class="required">*</span></label>
+                  <input id="postal-address" name="postalAddress" type="text" value="서울특별시 종로구 세종대로 209" autocomplete="street-address" required />
+                </div>
+                <div class="field span-2">
+                  <label for="detail-address">상세 위치</label>
+                  <input id="detail-address" name="detailAddress" type="text" value="본관 4층 교육지원과 물품관리실" />
+                </div>
+                <div class="field span-2">
+                  <label for="request-note">요청사항</label>
+                  <textarea id="request-note" name="requestNote" rows="5" placeholder="예: 평일 오후 2시 이후 수령 가능, 설치 지원 필요 여부 등">수업용 앱 사전 설치가 필요한 경우 별도 연락 바랍니다.</textarea>
+                </div>
+              </div>
+            </section>
+
+            <section class="summary-card" aria-labelledby="summary-title">
+              <h3 id="summary-title">입력 내용 요약</h3>
+              <p>최종 확인 단계에서 아래 내용을 다시 검토한 뒤 제출할 수 있습니다.</p>
+              <div class="summary-grid">
+                <div>
+                  <strong>신청기관</strong>
+                  <span>서울교육지원청</span>
+                </div>
+                <div>
+                  <strong>품목</strong>
+                  <span>교사용 태블릿 10형</span>
+                </div>
+                <div>
+                  <strong>수량</strong>
+                  <span>12개</span>
+                </div>
+                <div>
+                  <strong>납품 요청일</strong>
+                  <span>2026.03.25</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="fieldset" aria-labelledby="agreement-title">
+              <div class="fieldset-header">
+                <h3 class="fieldset-title" id="agreement-title">확인 및 동의</h3>
+                <p class="helper-text">제출 전 신청 정보의 정확성을 확인하고, 필요한 안내 사항을 읽어야 합니다.</p>
+              </div>
+              <div class="check-group">
+                <div class="check-row">
+                  <input id="agreement-1" name="agreement1" type="checkbox" required />
+                  <label for="agreement-1">입력한 주문 정보가 사실과 다르지 않으며, 제출 후 처리상태를 주문번호로 조회할 수 있음을 확인했습니다.</label>
+                </div>
+                <div class="check-row">
+                  <input id="agreement-2" name="agreement2" type="checkbox" required />
+                  <label for="agreement-2">신청 처리에 필요한 범위에서 담당자 연락처와 전자우편이 활용될 수 있음을 확인했습니다.</label>
+                </div>
+              </div>
+            </section>
+
+            <div class="button-row">
+              <div class="button-group">
+                <button class="btn btn-tertiary" type="button">작성 취소</button>
+              </div>
+              <div class="button-group">
+                <button class="btn btn-secondary" type="button">임시저장</button>
+                <button class="btn btn-primary" id="confirm-button" type="submit" disabled>신청 내용 확인</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="recent-status" class="footer-panel" aria-labelledby="recent-status-title">
+        <h2 id="recent-status-title">처리 단계 및 확인사항</h2>
+        <p>신청이 제출되면 접수 완료, 검토 중, 보완 요청, 최종 승인 순서로 상태가 갱신되며 주문 목록에서 같은 번호로 추적할 수 있습니다.</p>
+        <ul>
+          <li>보완 요청이 발생하면 신청 시 입력한 연락처와 전자우편으로 안내하는 구조를 권장합니다.</li>
+          <li>표의 금액과 수량처럼 비교가 필요한 숫자 데이터는 오른쪽 정렬해 가독성을 높였습니다.</li>
+          <li>모바일에서는 표 영역을 가로로 이동할 수 있게 두고, 입력폼은 한 열로 재배치되도록 구성했습니다.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>이 HTML은 KRDS v4 공개 가이드의 공공서비스 패턴을 참고해 주문 목록과 주문 신청 흐름을 예시로 구현한 화면입니다.</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("order-form");
+    const confirmButton = document.getElementById("confirm-button");
+    const validationMessage = document.getElementById("validation-message");
+    const requiredInputs = Array.from(form.querySelectorAll("input[required], select[required], textarea[required]"));
+
+    function updateSubmitState() {
+      const allValid = requiredInputs.every((input) => {
+        if (input.type === "checkbox") {
+          return input.checked;
+        }
+        return input.value.trim() !== "";
+      });
+
+      confirmButton.disabled = !allValid;
+      validationMessage.classList.remove("show");
+    }
+
+    requiredInputs.forEach((input) => {
+      input.addEventListener("input", updateSubmitState);
+      input.addEventListener("change", updateSubmitState);
+    });
+
+    form.addEventListener("submit", (event) => {
+      const invalidField = requiredInputs.find((input) => {
+        if (input.type === "checkbox") {
+          return !input.checked;
+        }
+        return input.value.trim() === "";
+      });
+
+      if (invalidField) {
+        event.preventDefault();
+        validationMessage.classList.add("show");
+        invalidField.focus();
+      }
+    });
+
+    updateSubmitState();
+  </script>
+</body>
+</html>

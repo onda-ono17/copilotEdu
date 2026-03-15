@@ -1,0 +1,14 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="8" width="240" height="240" rx="44" fill="url(#bg)"/>
+  <path d="M58 150C58 106.922 92.9218 72 136 72C169.97 72 199.139 93.7301 210 124.1C202.4 121.6 194.3 120.3 185.9 120.3C143.8 120.3 109.7 154.4 109.7 196.5C109.7 198 109.7 199.5 109.8 201H93C73.67 201 58 185.33 58 166V150Z" fill="#CFE0FF"/>
+  <circle cx="176" cy="174" r="44" fill="#EEF5FF"/>
+  <path d="M151 173.5L170 192.5L207 155.5" stroke="#246DF4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="40" y="116" fill="#FFFFFF" font-family="Noto Sans KR, Arial, sans-serif" font-size="34" font-weight="800">GREEN</text>
+  <text x="40" y="145" fill="#DCE8FF" font-family="Noto Sans KR, Arial, sans-serif" font-size="24" font-weight="700">SELF-WORK</text>
+  <defs>
+    <linearGradient id="bg" x1="24" y1="20" x2="230" y2="236" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#133871"/>
+      <stop offset="1" stop-color="#246DF4"/>
+    </linearGradient>
+  </defs>
+</svg>
